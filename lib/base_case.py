@@ -1,6 +1,8 @@
 import json.decoder
 from datetime import datetime
 from requests import Response
+from lib.my_requests import  MyRequests
+from lib.assertions import Assertions
 
 class BaseCase:
     def get_cookie(self, response: Response, cookie_name):
@@ -34,3 +36,11 @@ class BaseCase:
             'lastName': 'learnqa',
             'email': email
         }
+
+    def create_new_user(self, register_data):
+        response = MyRequests.post('/user/', data=register_data)
+
+        Assertions.assert_code_status(response, 200)
+        Assertions.assert_json_has_key(response, 'id')
+
+        return response

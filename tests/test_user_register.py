@@ -2,14 +2,7 @@ import pytest
 from lib.my_requests import MyRequests
 from lib.base_case import BaseCase
 from lib.assertions import Assertions
-import random
-import string
-
-
-def generate_random_string(length):
-    letters = string.ascii_lowercase
-    rand_string = ''.join(random.choice(letters) for i in range(length))
-    return rand_string
+from lib.random_string import generate_random_string
 
 
 
