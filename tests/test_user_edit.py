@@ -1,3 +1,5 @@
+import allure
+
 from lib.my_requests import MyRequests
 from lib.base_case import BaseCase
 from lib.assertions import Assertions
@@ -10,6 +12,7 @@ class TestUserEdit(BaseCase):
         ("too_short_first_name")
     ]
 
+    @allure.severity(allure.severity_level.CRITICAL)
     def test_edit_just_created_user(self):
         # REGISTER
         register_data = self.prepare_registration_data()
@@ -55,6 +58,7 @@ class TestUserEdit(BaseCase):
             "Wrong name of the user after edit"
         )
 
+    @allure.severity(allure.severity_level.NORMAL)
     def test_edit_user_not_auth(self):
         # REGISTER
         register_data = self.prepare_registration_data()
@@ -75,6 +79,7 @@ class TestUserEdit(BaseCase):
         assert response.content.decode("utf-8") == "Auth token not supplied", \
             f"Unexpected response content {response.content}"
 
+    @allure.severity(allure.severity_level.NORMAL)
     def test_edit_other_user(self):
         # REGISTER
         register_data = self.prepare_registration_data()
@@ -110,6 +115,7 @@ class TestUserEdit(BaseCase):
         assert response.content.decode("utf-8") == "Auth token not supplied", \
             f"Unexpected response content {response.content}"
 
+    @allure.severity(allure.severity_level.NORMAL)
     @pytest.mark.parametrize("condition", exclude_params)
     def test_edit_user_email_and_first_name_with_incorrect_value(self, condition):
         # REGISTER
